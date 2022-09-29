@@ -35,14 +35,14 @@ router.post("/api/users/:_id/exercises", async (req, res) => {
     const exercise = new Exercise({ owner: _id, description, duration, date });
     await exercise.save();
     const user = await User.findById(_id);
-    const response = {
-      username: user.username,
-      description,
-      duration,
-      date,
-      _id,
-    };
-    res.status(200).json(response);
+    // const response = {
+    //   username: user.username,
+    //   description,
+    //   duration,
+    //   date,
+    //   _id,
+    // };
+    res.status(200).json(user);
   } catch (error) {
     res.status(400).json(error);
   }
