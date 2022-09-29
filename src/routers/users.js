@@ -8,6 +8,15 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 router.use(urlEncodedParser);
 
+router.get("/api/users", async (req, res) => {
+  try {
+    const users = await User.find()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
 router.post("/api/users", async (req, res) => {
   try {
     const { username } = req.body;
