@@ -43,6 +43,7 @@ router.post('/api/users/:_id/exercises', async (req, res) => {
     //   date,
     //   _id,
     // };
+    debugger;
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json(error);
@@ -62,24 +63,26 @@ router.get('/api/users/:_id/logs', async (req, res) => {
           match: {date: {$gte: fromDate, $lte: toDate}},
         })
         .exec();
+
     const count = user.exercises.length;
 
-    // responseExercises = user.exercises.map((exercise) => {
-    //   return {
-    //     description: exercise.description,
-    //     duration: exercise.duration,
-    //     date: exercise.date.toDateString(),
-    //   };
-    // });
+    const responseExercises = user.exercises.map((exercise) => {
+      return {
+        description: exercise.description,
+        duration: exercise.duration,
+        date: exercise.date.toDateString(),
+      };
+    });
 
-    // const response = {
-    //   username: user.username,
-    //   count,
-    //   _id: user._id,
-    //   log: responseExercises
-    // };
+    const response = {
+      username: user.username,
+      count,
+      _id: user._id,
+      log: responseExercises,
+    };
 
-    res.status(200).json(user);
+    // console.log(response);
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json(error);
   }

@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.set('toObject', {virtuals: true});
+userSchema.set('toJSON', {virtuals: true});
+
 userSchema.virtual('exercises', {
   ref: 'Exercise',
   localField: '_id',
