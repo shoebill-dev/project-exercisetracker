@@ -32,19 +32,23 @@ router.post('/api/users/:_id/exercises', async (req, res) => {
   try {
     const {_id} = req.params;
     const {description, duration, date} = req.body;
-    const exercise = new Exercise({owner: _id, description, duration, date});
+    const exercise = new Exercise(
+        {owner: _id,
+          description,
+          duration,
+          date: (date) ? date : Date.now(),
+        });
     await exercise.save();
     const user = await User.findById(_id).populate('exercises').exec();
     console.log(user.exercises);
-    // const response = {
-    //   username: user.username,
-    //   description,
-    //   duration,
-    //   date,
-    //   _id,
-    // };
-    debugger;
-    res.status(200).json(user);
+    const response = {
+      username: user.username,
+      description,
+      duration,
+      date: exercise.date,
+      _id,
+    };
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json(error);
   }
