@@ -75,14 +75,14 @@ router.get('/api/users/:_id/logs', async (req, res) => {
     });
 
     const response = {
+      _id: user._id,
       username: user.username,
       count,
-      _id: user._id,
       log: responseExercises,
     };
 
     // console.log(response);
-    res.status(200).json(response);
+    res.status(200).send(response);
   } catch (error) {
     res.status(400).json(error);
   }
