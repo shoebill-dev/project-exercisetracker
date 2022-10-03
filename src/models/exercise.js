@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-require("../db/mongoose");
+const mongoose = require('mongoose');
+require('../db/mongoose');
 
 const exerciseSchema = new mongoose.Schema({
   description: {
@@ -16,10 +16,10 @@ const exerciseSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: 'User',
   },
 });
 
-const Exercise = mongoose.model("Exercise", exerciseSchema);
+const Exercise = mongoose.model('Exercise', exerciseSchema);
 
 module.exports = Exercise;
