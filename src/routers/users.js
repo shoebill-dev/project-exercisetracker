@@ -44,7 +44,7 @@ router.post('/api/users/:_id/exercises', async (req, res) => {
     const response = {
       username: user.username,
       description,
-      duration,
+      duration: exercise.duration,
       date: exercise.date.toDateString(),
       _id,
     };
